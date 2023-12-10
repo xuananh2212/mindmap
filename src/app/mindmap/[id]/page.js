@@ -1,7 +1,11 @@
-import React from 'react'
+import Flow from '@/Components/Flow/Flow'
 
 export default function MindMapDetail() {
      return (
-          <div>MindMapDetail</div>
+          <>
+               <div>MindMapDetail</div>
+               <Flow />
+
+          </>
      )
 }

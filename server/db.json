@@ -1,0 +1,14 @@
+{
+  "mindmap": [
+    {
+      "id": 1,
+      "nodes": "json-server",
+      "edges": "typicode"
+    },
+    {
+      "id": 2,
+      "nodes": "json-server",
+      "edges": "typicode"
+    }
+  ]
+}
