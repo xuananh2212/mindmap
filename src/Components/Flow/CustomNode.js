@@ -1,12 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Handle, Position } from 'reactflow';
-
-const handleStyle = { left: 10 };
-
-function CustomNode({ data, isConnectable }) {
+function CustomNode({ data, isConnectable, ...rest }) {
      const [editNode, setEditNode] = useState(false);
      const [name, setName] = useState(data?.label);
-     console.log(data);
      const onChange = useCallback((e) => {
           setName(e.target.value)
      }, []);
@@ -23,10 +19,11 @@ function CustomNode({ data, isConnectable }) {
           data.label = name;
           setEditNode(false);
      }
-
      return (
           <div className="text-updater-node">
-               <Handle type="target" position={Position.Top} isConnectable={isConnectable} />
+               {
+                    rest.id !== "node0" && (<Handle type="target" position={Position.Top} isConnectable={isConnectable} />)
+               }
                <div >
                     {
                          !editNode
@@ -43,8 +40,8 @@ function CustomNode({ data, isConnectable }) {
                               (
                                    <form onSubmit={handleSubmit}>
                                         <input
-                                             style={{ width: "100%" }}
-                                             onBlur={() => handleOnBlur}
+                                             style={{ width: "100%", textAlign: "center", border: "1px solid #fff" }}
+                                             onBlur={handleOnBlur}
                                              id="text"
                                              value={name}
                                              name="text"

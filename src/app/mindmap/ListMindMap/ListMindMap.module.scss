@@ -1,0 +1,81 @@
+.tableMindMap {
+     width: 100%;
+     margin-top: 30px;
+     border-collapse: separate;
+     border-spacing: 0 16px;
+
+
+     thead {
+          th {
+               text-align: left;
+               font-size: 2.2rem;
+
+          }
+     }
+
+     tbody {
+          tr {
+               cursor: pointer;
+               height: 40px;
+               min-height: 40px;
+               border-radius: 12px;
+               border: 1px solid #333;
+
+               &:hover {
+                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+               }
+          }
+
+          td {
+               .desc {
+                    display: -webkit-box;
+                    margin-top: 4px;
+                    color: #817f7f;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+               }
+          }
+     }
+
+     .action {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          .icon {
+               color: rgb(59, 59, 216);
+               cursor: pointer;
+               font-size: 2.0rem;
+
+          }
+     }
+
+     .checkAllMindMap {
+          position: relative;
+
+          .btnCheckAll {
+               top: 0;
+               left: 36px;
+               position: absolute;
+
+               .icon {
+                    font-size: 2.0rem;
+               }
+
+          }
+
+     }
+
+     .iconRemove {
+          color: rgb(231, 58, 58) !important;
+     }
+
+     input {
+          display: block;
+          width: 20px;
+          height: 20px;
+     }
+
+}

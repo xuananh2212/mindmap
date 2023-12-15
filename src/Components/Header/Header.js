@@ -6,14 +6,15 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { Row, Col, Dropdown, notification } from 'antd';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
      const { user, error, isLoading } = useUser();
+     const pathname = usePathname()
      if (isLoading) return <div>Loading...</div>;
      if (error) return <div>{error.message}</div>;
-     console.log(user);
      const handleLogout = () => {
-          window.location.replace('/api/auth/logout');
+          window.location.replace(`/api/auth/logout`);
      }
      const items = [
           {
@@ -56,23 +57,43 @@ export default function Header() {
                               <nav className={clsx(styles.navBar)}>
                                    <ul>
                                         <li>
-                                             <Link href={"/"}>Home</Link>
+                                             <Link
+                                                  href={"/"}
+                                                  className={`link ${pathname === '/' ? 'active' : ''}`}
+                                             >Home</Link>
                                         </li>
                                         <li>
-                                             <Link href={"/about"}>Giới thiệu</Link>
+                                             <Link
+                                                  href={"/about"}
+                                                  className={`link ${pathname === '/about' ? 'active' : ''}`}
+                                             >
+                                                  Giới thiệu
+                                             </Link>
                                         </li>
                                         <li>
-                                             <Link href={"/feature"}>Tính năng</Link>
+                                             <Link
+                                                  href={"/feature"}
+                                                  className={`link ${pathname === '/feature' ? 'active' : ''}`}
+                                             >Tính năng</Link>
                                         </li>
                                         <li>
-                                             <Link href={"/price-service"}>Bảng giá</Link>
+                                             <Link
+                                                  href={"/price-service"}
+                                                  className={`link ${pathname === '/price-service' ? 'active' : ''}`}
+                                             >Bảng giá</Link>
                                         </li>
                                         <li>
-                                             <Link href={"/contact"}>Liên hệ</Link>
+                                             <Link
+                                                  href={"/contact"}
+                                                  className={`link ${pathname === '/contact' ? 'active' : ''}`}
+                                             >Liên hệ</Link>
                                         </li>
                                         {
                                              user && <li>
-                                                  <Link href={'/mindmap'}>Mindmap</Link>
+                                                  <Link
+                                                       href={'/mindmap'}
+                                                       className={`link ${pathname === '/mindmap' ? 'active' : ''}`}
+                                                  >Mindmap</Link>
                                              </li>
                                         }
                                         <li>

@@ -14,17 +14,18 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import CustomNode from './CustomNode';
+import CustomEdge from './CustomEdge';
 const initialNodes = [
      {
-          id: '0',
-          type: 'input',
+          id: 'node0',
+          type: 'textUpdater',
           data: { label: 'FullStack' },
           position: { x: 0, y: 50 },
           style: {
                backgroundColor: "#0093E9",
                backgroundImage: "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
                color: "#fff",
-               border: "none"
+               borderRadius: "3px"
           }
      },
 ];
@@ -32,12 +33,14 @@ const initialNodes = [
 let id = 1;
 const getId = () => `${id++}`;
 const nodeTypes = { textUpdater: CustomNode };
+const edgeTypes = {
+     'custom-edge': CustomEdge,
+};
 
-export default function AddNodeOnEdgeDrop() {
+export default function NodeOnEdgeDrop() {
      const edgeUpdateSuccessful = useRef(true);
      const [variant, setVariant] = useState('cross');
-     const [nodeIdCurrent, setNodeIdCurrent] = useState(null);
-     const [edgesIdCurrent, setEdgesIdCurrent] = useState(null);
+     const [id, setId] = useState(null);
      const reactFlowWrapper = useRef(null);
      const connectingNodeId = useRef(null);
      const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -52,7 +55,6 @@ export default function AddNodeOnEdgeDrop() {
      const onConnectStart = useCallback((_, { nodeId }) => {
           connectingNodeId.current = nodeId;
      }, []);
-
      const onConnectEnd = useCallback(
           (event) => {
                if (!connectingNodeId.current) return;
@@ -62,7 +64,7 @@ export default function AddNodeOnEdgeDrop() {
                if (targetIsPane) {
                     const id = getId();
                     const newNode = {
-                         id,
+                         id: `node${id}`,
                          position: screenToFlowPosition({
                               x: event.clientX,
                               y: event.clientY,
@@ -81,55 +83,41 @@ export default function AddNodeOnEdgeDrop() {
 
                     setNodes((nds) => [...nds, newNode]);
                     setEdges((eds) =>
-                         [...eds, { id, source: connectingNodeId.current, target: id }]
+                         [...eds, { id: `edge${id}`, source: connectingNodeId.current, target: `node${id}` }]
                     );
                }
           },
-          [screenToFlowPosition],
-     );
-     console.log(edgeUpdateSuccessful, connectingNodeId);
-     const onEdgeUpdateStart = useCallback(() => {
-          console.log("onEdgeUpdateStart");
-          edgeUpdateSuccessful.current = false;
-     }, []);
-
-     const onEdgeUpdate = useCallback((oldEdge, newConnection) => {
-          console.log('onEdgeUpdate', oldEdge, newConnection)
-          edgeUpdateSuccessful.current = true;
-          setEdges((els) => updateEdge(oldEdge, newConnection, els));
-     }, []);
-
-     const onEdgeUpdateEnd = useCallback((_, edge) => {
-          console.log('onEdgeUpdateEnd');
-          console.log(edge);
-          if (!edgeUpdateSuccessful.current) {
-               setEdges((eds) => eds.filter((e) => e.id !== edge.id));
-          }
-
-          edgeUpdateSuccessful.current = true;
-     }, []);
+          [screenToFlowPosition]
+     )
      const handleClickNode = (_, { id }) => {
-          console.log(id, nodes);
-          setNodeIdCurrent(id);
+          setId(id);
 
      }
-     const handleClickEdge = (_, edge) => {
-          console.log(edge);
+     const handleClickEdge = (_, { id }) => {
+          setId(id);
 
      }
+     console.log(id);
      useEffect(() => {
           const handleDeleteNodeAndEdges = (e) => {
-               console.log("dm", e.code, nodeIdCurrent);
-               if (e.code === 'Delete' && nodeIdCurrent) {
-                    console.log(nodeIdCurrent, nodes.filter((node => node.id !== nodeIdCurrent)));
-                    setNodes(nodes.filter((node => node.id !== nodeIdCurrent)));
 
+               if (e.code === 'Delete' && id && id !== "node0") {
+                    if (id.charAt(0) === 'n') {
+                         setNodes((nodes) => {
+                              console.log(nodes);
+                              return nodes.filter(node => node.id !== id);
+                         });
+                         setEdges((edges) => edges.filter((edge) => edge.source !== id));
 
+                    } else {
+                         setEdges((edges) => edges.filter((edge) => edge.id !== id));
+                    }
                }
+
           }
           window.addEventListener("keyup", handleDeleteNodeAndEdges)
 
-     }, [nodeIdCurrent]);
+     }, [id]);
 
      return (
           <div className="wrapper" ref={reactFlowWrapper} style={{ width: "100%", height: "500px" }}>
@@ -142,15 +130,13 @@ export default function AddNodeOnEdgeDrop() {
                     onConnectStart={onConnectStart}
                     onConnectEnd={onConnectEnd}
                     snapToGrid
-                    onEdgeUpdate={onEdgeUpdate}
-                    onEdgeUpdateStart={onEdgeUpdateStart}
-                    onEdgeUpdateEnd={onEdgeUpdateEnd}
                     onNodeClick={handleClickNode}
                     onEdgeClick={handleClickEdge}
-                    nodeTypes={nodeTypes}
                     fitView
                     fitViewOptions={{ padding: 2 }}
                     nodeOrigin={[0.5, 0]}
+                    nodeTypes={nodeTypes}
+                    edgeTypes={edgeTypes}
                >
 
                     <Background color="#ccc" variant={variant} />

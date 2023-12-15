@@ -1,14 +1,30 @@
 {
   "mindmap": [
     {
-      "id": 1,
-      "nodes": "json-server",
-      "edges": "typicode"
-    },
-    {
-      "id": 2,
-      "nodes": "json-server",
-      "edges": "typicode"
+      "id": "fc193d19-6410-45fb-b012-2d44d1955e9f",
+      "title": "Mindmap không có tên",
+      "desc": "chưa có mô tả",
+      "nodes": [
+        {
+          "id": "node0",
+          "type": "textUpdater",
+          "data": {
+            "label": "FullStack"
+          },
+          "position": {
+            "x": 0,
+            "y": 50
+          },
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "borderRadius": "3px"
+          }
+        }
+      ],
+      "edges": [],
+      "createDate": "15/12/2023 16:07:26"
     }
   ]
 }
