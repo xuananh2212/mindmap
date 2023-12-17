@@ -1,20 +1,32 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './Header.module.scss';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Row, Col, Dropdown, notification } from 'antd';
+import { Row, Col, Dropdown } from 'antd';
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
-import { usePathname } from 'next/navigation'
-
+import { usePathname } from 'next/navigation';
+import { mindMapSlices } from '@/store/slices/mindMapSlices';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+const { idUser } = mindMapSlices.actions;
 export default function Header() {
      const { user, error, isLoading } = useUser();
-     const pathname = usePathname()
+     const route = useRouter();
+     const pathname = usePathname();
+     const dispatch = useDispatch();
+     useEffect(() => {
+          if (user) {
+               dispatch(idUser(user.sub));
+          }
+
+     }, [user]);
      if (isLoading) return <div>Loading...</div>;
      if (error) return <div>{error.message}</div>;
+
      const handleLogout = () => {
-          window.location.replace(`/api/auth/logout`);
+          route.push(`/api/auth/logout`);
      }
      const items = [
           {
@@ -36,8 +48,6 @@ export default function Header() {
                },
           },
      ];
-
-
      return (
           <header className={clsx(styles.header)}>
                <nav>

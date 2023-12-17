@@ -1,11 +1,9 @@
-import Flow from '@/Components/Flow/Flow'
+import Flow from '@/app/mindmap/Flow/Flow'
 
-export default function MindMapDetail() {
+export default function MindMapDetail({ params }) {
      return (
-          <>
-               <div>MindMapDetail</div>
-               <Flow />
 
-          </>
+          <Flow id={params?.id} />
+
      )
 }

@@ -1,11 +1,12 @@
 "use client"
 import { ReactFlowProvider } from 'reactflow';
-import NodeOnEdgeDrop from './NodeOnEdge';
+import NodeOnEdgeDrop from '../NodeOnEdge/NodeOnEdge';
 
-export default function Flow() {
+
+export default function Flow({ id }) {
      return (
           <ReactFlowProvider>
-               <NodeOnEdgeDrop />
+               <NodeOnEdgeDrop id={id} />
           </ReactFlowProvider>
      )
 

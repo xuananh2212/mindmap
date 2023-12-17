@@ -1,17 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteMindMapMiddleware, getMindMapMiddleware, postMindMapMiddleware } from "../middlewares/mindMapmiddleware";
+import { deleteAllMindMapMiddleware, deleteMindMapMiddleware, getMindMapMiddleware, postMindMapMiddleware, updateMindMapMiddleware } from "../middlewares/mindMapmiddleware";
 const initialState = {
      listMindMaps: [],
-     loading: false
+     loading: false,
+     idUser: ""
 }
 
 export const mindMapSlices = createSlice({
      name: "mindmaps",
      initialState,
-     reducers: [
-     ],
+     reducers: {
+          idUser: (state, action) => {
+               state.idUser = action.payload;
+          }
+     }
+     ,
      extraReducers: (builder) => {
-          const actionMiddleware = [getMindMapMiddleware, postMindMapMiddleware, deleteMindMapMiddleware];
+          const actionMiddleware = [getMindMapMiddleware, postMindMapMiddleware,
+               deleteMindMapMiddleware, deleteAllMindMapMiddleware, updateMindMapMiddleware];
           actionMiddleware.forEach((action) => {
                builder.addCase(action.pending, (state) => {
                     state.loading = true;
@@ -23,7 +29,7 @@ export const mindMapSlices = createSlice({
           })
 
           builder.addCase(getMindMapMiddleware.fulfilled, (state, action) => {
-               state.listMindMaps = action.payload;
+               state.listMindMaps = action.payload.data.filter(({ idUser }) => idUser === action.payload.id);
                state.loading = false;
           });
           builder.addCase(postMindMapMiddleware.fulfilled, (state, action) => {
@@ -35,6 +41,18 @@ export const mindMapSlices = createSlice({
           builder.addCase(deleteMindMapMiddleware.fulfilled, (state, action) => {
                if (action.payload) {
                     state.listMindMaps = state.listMindMaps.filter(mindmap => mindmap.id !== action.payload);
+               }
+               state.loading = false;
+          });
+          builder.addCase(deleteAllMindMapMiddleware.fulfilled, (state, action) => {
+               if (action.payload) {
+                    state.listMindMaps = [...state.listMindMaps.filter(({ id }) => !action.payload.includes(id))];
+               }
+               state.loading = false;
+          });
+          builder.addCase(updateMindMapMiddleware.fulfilled, (state, action) => {
+               if (action.payload) {
+                    state.listMindMaps = [...(state.listMindMaps.filter(({ id }) => id !== action.payload.id)), action.payload];
                }
                state.loading = false;
           });

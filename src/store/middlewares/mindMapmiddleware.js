@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-const api = "http://localhost:3005/mindmap";
-export const getMindMapMiddleware = createAsyncThunk("mindmap/getMindMapMiddleware", async () => {
+import { configConsumerProps } from 'antd/es/config-provider';
+const api = "https://gsv9fx-8080.csb.app/mindmap";
+export const getMindMapMiddleware = createAsyncThunk("mindmap/getMindMapMiddleware", async (id) => {
      const response = await fetch(`${api}`);
      const data = await response.json();
-     return data;
+     return { data, id };
 })
 export const postMindMapMiddleware = createAsyncThunk("mindmap/postMindMapMiddleware", async (data) => {
      const response = await fetch(`${api}`, {
@@ -15,9 +16,9 @@ export const postMindMapMiddleware = createAsyncThunk("mindmap/postMindMapMiddle
      });
      if (response.ok) {
           return data;
-     } else {
-          return null;
      }
+     return null;
+
 })
 
 export const deleteMindMapMiddleware = createAsyncThunk("mindmap/deleteMindMapMiddleware", async (id) => {
@@ -29,7 +30,41 @@ export const deleteMindMapMiddleware = createAsyncThunk("mindmap/deleteMindMapMi
      });
      if (response.ok) {
           return id;
-     } else {
+     }
+     return null;
+
+})
+
+export const deleteAllMindMapMiddleware = createAsyncThunk("mindmap/deleteAllMindMapMiddleware", async (mindmaps) => {
+     const headers = {
+          'Content-Type': 'application/json'
+     }
+
+     let delArray = mindmaps?.map(({ id }) => id)
+     let delFetch = delArray.map(eleid => {
+          return fetch(`http://localhost:3005/mindmap/${eleid}`, {
+               method: 'DELETE',
+               headers: headers,
+          });
+     });
+     try {
+          const res = await Promise.all([delFetch]);
+          return delArray;
+     } catch (e) {
           return null;
      }
+})
+
+export const updateMindMapMiddleware = createAsyncThunk("mindmap/updateMindMapMiddleware", async (data) => {
+     const response = await fetch(`${api}/${data.id}`, {
+          method: 'PUT',
+          headers: {
+               'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+     });
+     if (response.ok) {
+          return data;
+     }
+     return null;
 })

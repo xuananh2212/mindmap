@@ -1,9 +1,246 @@
 {
   "mindmap": [
     {
-      "id": "fc193d19-6410-45fb-b012-2d44d1955e9f",
-      "title": "Mindmap không có tên",
+      "id": "277e9bcb-e65f-41a5-9d42-308cee4709dc",
+      "name": "Mindmap không có tên",
+      "title": "tuan anh",
       "desc": "chưa có mô tả",
+      "idUser": "google-oauth2|117336631424991847832",
+      "descTitle": "gsfdgsdfgsdfg",
+      "img": "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg",
+      "share": 2,
+      "nodes": [
+        {
+          "id": "node0",
+          "type": "textUpdater",
+          "data": {
+            "label": "FullStack"
+          },
+          "position": {
+            "x": 0,
+            "y": -15
+          },
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 0,
+            "y": -15
+          },
+          "dragging": false
+        },
+        {
+          "id": "node1",
+          "position": {
+            "x": -90,
+            "y": 60
+          },
+          "data": {
+            "label": "Node 1"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -90,
+            "y": 60
+          },
+          "dragging": false
+        },
+        {
+          "id": "node2",
+          "position": {
+            "x": 105,
+            "y": 60
+          },
+          "data": {
+            "label": "Node 2"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 105,
+            "y": 60
+          },
+          "dragging": false
+        },
+        {
+          "id": "node3",
+          "position": {
+            "x": -165,
+            "y": 150
+          },
+          "data": {
+            "label": "Node 3"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40
+        },
+        {
+          "id": "node4",
+          "position": {
+            "x": 15,
+            "y": 135
+          },
+          "data": {
+            "label": "Node 4"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 15,
+            "y": 135
+          },
+          "dragging": false
+        },
+        {
+          "id": "node5",
+          "position": {
+            "x": -255,
+            "y": 225
+          },
+          "data": {
+            "label": "Node 5"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40
+        },
+        {
+          "id": "node6",
+          "position": {
+            "x": -75,
+            "y": 270
+          },
+          "data": {
+            "label": "Node 6"
+          },
+          "origin": [
+            0.5,
+            0
+          ],
+          "type": "textUpdater",
+          "style": {
+            "backgroundColor": "#0093E9",
+            "backgroundImage": "linear-gradient(160deg, #0093E9 0 %, #80D0C7 100 %)",
+            "color": "#fff",
+            "border": "none",
+            "borderRadius": "3px"
+          },
+          "width": 150,
+          "height": 40
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge1",
+          "source": "node0",
+          "target": "node1"
+        },
+        {
+          "id": "edge2",
+          "source": "node0",
+          "target": "node2"
+        },
+        {
+          "id": "edge3",
+          "source": "node1",
+          "target": "node3"
+        },
+        {
+          "id": "edge4",
+          "source": "node1",
+          "target": "node4"
+        },
+        {
+          "id": "edge5",
+          "source": "node3",
+          "target": "node5"
+        },
+        {
+          "id": "edge6",
+          "source": "node3",
+          "target": "node6"
+        }
+      ],
+      "createDate": "17/12/2023 14:56:45"
+    },
+    {
+      "id": "2d4c4770-cde8-48d1-a634-b72e05cebdba",
+      "name": "Mindmap không có tên",
+      "desc": "chưa có mô tả",
+      "title": "Mindmap không có tên",
+      "descTitle": "",
+      "idUser": "google-oauth2|117336631424991847832",
+      "share": 1,
+      "img": "http://f8-mindmap.sanphamkythuat.online:880/_next/static/media/so-do-tu-duy.95dad645.jpg",
       "nodes": [
         {
           "id": "node0",
@@ -24,7 +261,7 @@
         }
       ],
       "edges": [],
-      "createDate": "15/12/2023 16:07:26"
+      "createDate": "17/12/2023 15:02:15"
     }
   ]
 }

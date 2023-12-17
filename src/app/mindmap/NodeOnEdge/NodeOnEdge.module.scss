@@ -1,0 +1,69 @@
+.nodeOnEdge {
+     .content {
+          margin-bottom: 30px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .contentLeft {
+               .title {
+                    display: block;
+                    margin-bottom: 14px;
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    outline: none;
+                    border: none;
+               }
+
+               .desc {
+                    margin-bottom: 10px;
+                    font-size: 1.7rem;
+                    outline: none;
+                    border: none;
+
+               }
+          }
+
+          .contentRight {
+               display: flex;
+               gap: 10px;
+
+               .btnSave,
+               .btnShare {
+                    padding: 10px;
+                    min-width: 120px;
+                    gap: 5px;
+                    color: #fff;
+                    display: flex;
+                    justify-content: center;
+                    border-radius: 4px;
+               }
+
+               .btnSave {
+                    background-color: rgb(91, 150, 2);
+               }
+
+               .btnShare {
+                    background-color: #0093E9;
+                    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+               }
+          }
+
+     }
+}
+
+.descPrivate {
+     margin-top: 18px !important;
+}
+
+.btnShare {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 5px;
+
+}
+
+.btnSave {
+     color: #fff;
+}

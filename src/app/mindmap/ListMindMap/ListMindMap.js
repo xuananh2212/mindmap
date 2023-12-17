@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { deleteMindMapMiddleware, getMindMapMiddleware } from '@/store/middlewares/mindMapmiddleware';
+import { deleteAllMindMapMiddleware, deleteMindMapMiddleware, getMindMapMiddleware } from '@/store/middlewares/mindMapmiddleware';
 import { useDispatch, useSelector } from 'react-redux';
 import { notification } from 'antd';
 import styles from './ListMindMap.module.scss';
@@ -9,7 +9,9 @@ import clsx from 'clsx';
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { message, Popconfirm, Modal } from 'antd';
 import Link from 'next/link';
+import { useUser } from '@auth0/nextjs-auth0/client';
 export default function ListMindMap() {
+     const idUser = useSelector((state) => state.mindMap.idUser);
      const [selectedItems, setSelectedItems] = useState([]);
      const dispatch = useDispatch();
      const [open, setOpen] = useState(false);
@@ -18,13 +20,13 @@ export default function ListMindMap() {
      const mindmaps = useSelector(state => state.mindMap.listMindMaps);
      const loadMindmaps = async () => {
           try {
-               const result = await dispatch(getMindMapMiddleware());
+               const result = await dispatch(getMindMapMiddleware(idUser));
                unwrapResult(result);
 
           } catch (e) {
                notification.error({
                     message: 'server error!!',
-                    duration: 1.5,
+                    duration: 1.0,
                });
           }
      }
@@ -36,9 +38,31 @@ export default function ListMindMap() {
           } catch (e) {
                notification({
                     message: "server error",
+                    duration: 1.0
+
+               })
+          }
+
+     }
+     const loadDeleteAllMindMaps = async () => {
+          setConfirmLoading(true);
+          try {
+               if (mindmaps.length > 0) {
+                    console.log(selectedItems);
+                    const result = await dispatch(deleteAllMindMapMiddleware(mindmaps.filter(({ id }) => selectedItems.includes(id))));
+                    unwrapResult(result);
+                    message.success('xoá tất cả mindmap Thành công');
+               }
+               setSelectedItems([]);
+               setConfirmLoading(false);
+               setOpen(false);
+          } catch (e) {
+               notification({
+                    message: "server error",
                     duration: 1.5
 
                })
+               setOpen(false);
           }
 
      }
@@ -58,6 +82,7 @@ export default function ListMindMap() {
           if (e.target.checked) {
                console.log(mindmaps?.map(({ id }) => id));
                setSelectedItems(mindmaps?.map(({ id }) => id));
+
           } else {
                setSelectedItems([]);
           }
@@ -72,12 +97,7 @@ export default function ListMindMap() {
           loadDeleteMindMaps(id);
      }
      const handleOk = () => {
-          setModalText('The modal will be closed after two seconds');
-          setConfirmLoading(true);
-          setTimeout(() => {
-               setOpen(false);
-               setConfirmLoading(false);
-          }, 2000);
+          loadDeleteAllMindMaps();
      };
 
      const handleCancel = () => {
@@ -85,12 +105,11 @@ export default function ListMindMap() {
           setOpen(false);
      };
      const cancel = (e) => {
-          console.log(e);
-          message.error('Click on No');
+
      };
      useEffect(() => {
           loadMindmaps();
-     }, [])
+     }, [idUser])
      return (
           <table className={clsx(styles.tableMindMap)}>
                <thead>
@@ -103,7 +122,7 @@ export default function ListMindMap() {
                                         onChange={checkAllHandler} />
                                    {
 
-                                        mindmaps.length > 0 && (mindmaps?.length === selectedItems.length) &&
+                                        mindmaps.length > 0 && selectedItems.length > 0 &&
                                         (
 
                                              <>
@@ -168,6 +187,10 @@ export default function ListMindMap() {
                                         </td>
                                         <td>
                                              <div className={clsx(styles.action)}>
+
+                                                  <Link href={`/mindmap/${id}`}>
+                                                       <FaEdit className={clsx(styles.icon)} />
+                                                  </Link>
                                                   <Popconfirm
                                                        placement="top"
                                                        title="Bạn muốn xóa mindmap này?"
@@ -176,13 +199,11 @@ export default function ListMindMap() {
                                                        onCancel={cancel}
                                                        okText="Yes"
                                                        cancelText="No"
-
                                                   >
                                                        <button>
                                                             <FaTrashAlt className={clsx(styles.icon, styles.iconRemove)} />
                                                        </button>
                                                   </Popconfirm>
-                                                  <Link href={`/mindmap/${id}`}>  <FaEdit className={clsx(styles.icon)} /></Link>
                                              </div>
 
                                         </td>
