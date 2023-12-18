@@ -9,7 +9,6 @@ import clsx from 'clsx';
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { message, Popconfirm, Modal } from 'antd';
 import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0/client';
 export default function ListMindMap() {
      const idUser = useSelector((state) => state.mindMap.idUser);
      const [selectedItems, setSelectedItems] = useState([]);

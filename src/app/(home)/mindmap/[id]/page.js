@@ -1,6 +1,6 @@
-import Flow from '@/app/mindmap/Flow/Flow';
+import Flow from '@/app/(home)/mindmap/Flow/Flow';
 import { getSession } from "@auth0/nextjs-auth0";
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 export const generateMetadata = async ({ params }) => {
      const response = await fetch(`https://gsv9fx-8080.csb.app/mindmap/${params.id}`);
      const data = await response.json();
@@ -25,6 +25,9 @@ export default async function MindMapDetail({ params }) {
      }
      const response = await fetch(`https://gsv9fx-8080.csb.app/mindmap/${params.id}`);
      const data = await response.json();
+     if (!data.idUser) {
+          notFound();
+     }
      if (data.share == 1) {
           if (!idUser) {
                redirect("/api/auth/login");

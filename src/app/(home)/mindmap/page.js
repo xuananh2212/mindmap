@@ -9,7 +9,6 @@ import ListMindMap from './ListMindMap/ListMindMap';
 import { notification } from 'antd';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@auth0/nextjs-auth0/client';
 export default function Mindmap() {
      const idUser = useSelector(state => state.mindMap.idUser);
      const router = useRouter();

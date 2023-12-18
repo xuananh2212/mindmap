@@ -24,7 +24,6 @@ import { notification, Radio, Form, Input, Button, Modal } from 'antd';
 import { updateMindMapMiddleware } from '@/store/middlewares/mindMapmiddleware';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useRouter } from 'next/navigation';
 import CustomNode from '../Flow/CustomNode';
 import CustomEdge from '../Flow/CustomEdge';
 const nodeTypes = { textUpdater: CustomNode };
@@ -35,7 +34,6 @@ export const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function NodeOnEdgeDrop({ id: paramsId }) {
      const { user } = useUser();
-     const route = useRouter();
      const dispatch = useDispatch();
      const [value, setValue] = useState(1);
      const [form] = Form.useForm();
@@ -45,8 +43,11 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
      const [variant, setVariant] = useState('cross');
      const [id, setId] = useState(null);
      const lastIdRef = useRef(1);
-     const [titleMindMap, setTitleMindMap] = useState("");
+     const [nameMindMap, setnameMindMap] = useState("");
      const [descMindMap, setDescMindMap] = useState("");
+     const [titleMindMap, setTitleMindMap] = useState("");
+     const [descTitleMindMap, setDescTitleMindMap] = useState("");
+     const [urlImg, setUrlImg] = useState("");
      const reactFlowWrapper = useRef(null);
      const connectingNodeId = useRef(null);
      const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -63,16 +64,13 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
           if (data) {
                setNodes(data.nodes);
                setEdges(data.edges);
-               setTitleMindMap(data.name);
+               setnameMindMap(data.name);
                setDescMindMap(data.desc);
                lastIdRef.current = +data.nodes[data.nodes?.length - 1]?.id?.match(/[0-9]+/)[0];
                setValue(data.share);
-               form.setFieldsValue({
-                    urlShare: urlRef.current,
-                    title: data.title,
-                    descTitle: data.descTitle,
-                    image: data.img
-               })
+               setTitleMindMap(data.title);
+               setDescTitleMindMap(data.descTitle);
+               setUrlImg(data.img);
           }
      }, [data, user]);
      useEffect(() => {
@@ -80,6 +78,7 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                urlRef.current = window.location.href;
           }
      }, [])
+     console.log(user);
 
 
      const onConnect = useCallback(
@@ -137,18 +136,19 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
           setId(id);
 
      }
-     const loadUpdateMindMap = async (image, title, descTile, share) => {
+     const loadUpdateMindMap = async () => {
           try {
+               console.log(titleMindMap, descTitleMindMap, urlImg)
                if (data) {
                     const result = await dispatch(updateMindMapMiddleware({
                          id: data.id,
-                         name: titleMindMap,
-                         title: title ?? data.title,
+                         name: nameMindMap,
+                         title: titleMindMap,
                          desc: descMindMap,
                          idUser: data.idUser,
-                         descTitle: descTile ?? data.descTitle,
-                         img: image ?? data.img,
-                         share: share ?? data.share,
+                         descTitle: descTitleMindMap,
+                         img: urlImg,
+                         share: value,
                          nodes: nodes,
                          edges: edges,
                          createDate: data.createDate,
@@ -159,13 +159,16 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                          duration: 1.0,
                     })
                }
+               document.title = titleMindMap;
                setLoading(false);
 
           } catch (e) {
+               console.log(e);
                notification.error({
                     message: 'server error!!',
                     duration: 1.0,
                })
+
           }
      }
      const handleClickSave = () => {
@@ -189,23 +192,23 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
 
      const showModal = () => {
           setOpen(true);
-     };
+          form.setFieldsValue({
+               urlShare: urlRef.current,
+               title: titleMindMap,
+               descTitle: descTitleMindMap,
+               image: urlImg
+          })
 
+     };
      const handleOk = () => {
           setLoading(true);
-          const valueForm = form.getFieldsValue();
-          const { image, title, descTitle } = valueForm;
-          console.log(image, title, descTitle);
-          loadUpdateMindMap(image, title, descTitle, value);
-
-
+          loadUpdateMindMap();
      };
 
      const handleCancel = () => {
           setOpen(false);
      };
      const onChange = (e) => {
-          console.log('radio checked', e.target.value);
           setValue(e.target.value);
      };
      const handleFocus = (e) => {
@@ -218,8 +221,8 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                     <div className={clsx(styles.contentLeft)}>
                          <input
                               className={clsx(styles.title)}
-                              value={titleMindMap}
-                              onChange={(e) => setTitleMindMap(e.target.value)}
+                              value={nameMindMap}
+                              onChange={(e) => setnameMindMap(e.target.value)}
                          />
 
 
@@ -230,7 +233,7 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                          />
 
                     </div>
-                    {user && (
+                    {user && user.sub === data?.idUser && (
                          <div className={clsx(styles.contentRight)}>
                               <button
                                    className={clsx(styles.btnSave)}
@@ -296,15 +299,17 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                                                             >
                                                                  <Input
                                                                       onFocus={handleFocus}
-
                                                                       readOnly
                                                                  />
                                                             </Form.Item>
                                                             <Form.Item name="title" label="Tiêu Đề" rules={[{ required: true }]}>
-                                                                 <Input />
+                                                                 <Input
+                                                                      onChange={(e) => setTitleMindMap(e.target.value)}
+                                                                 />
                                                             </Form.Item>
                                                             <Form.Item name="descTitle" label="Mô Tả" rules={[{ required: true }]}>
                                                                  <Input.TextArea
+                                                                      onChange={(e) => setDescTitleMindMap(e.target.value)}
 
                                                                       style={{ resize: "none" }} />
                                                             </Form.Item>
@@ -313,7 +318,9 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                                                                  label="Ảnh chia sẻ"
                                                                  rules={[{ required: true }, { type: 'url', warningOnly: true }, { type: 'string', min: 6 }]}
                                                             >
-                                                                 <Input />
+                                                                 <Input
+                                                                      onChange={(e) => setUrlImg(e.target.value)}
+                                                                 />
                                                             </Form.Item>
                                                        </Form>
 
