@@ -1,53 +1,21 @@
-"use client"
-import React, { useEffect } from 'react'
 import styles from './Header.module.scss';
-import { useUser } from '@auth0/nextjs-auth0/client';
 import clsx from 'clsx';
+import { getSession } from "@auth0/nextjs-auth0";
 import Link from 'next/link';
-import { Row, Col, Dropdown } from 'antd';
-import { FaUser, FaSignOutAlt } from 'react-icons/fa';
-import { usePathname } from 'next/navigation';
-import { mindMapSlices } from '@/store/slices/mindMapSlices';
-import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-const { idUser } = mindMapSlices.actions;
-export default function Header() {
-     const { user, error, isLoading } = useUser();
-     const route = useRouter();
-     const pathname = usePathname();
-     const dispatch = useDispatch();
-     useEffect(() => {
-          if (user) {
-               dispatch(idUser(user.sub));
-          }
-
-     }, [user]);
-     if (isLoading) return <div>Loading...</div>;
-     if (error) return <div>{error.message}</div>;
-
-     const handleLogout = () => {
-          route.push(`/api/auth/logout`);
+import { Row, Col } from 'antd';
+import { headers } from "next/headers";
+import Auth from '../Auth/Auth';
+export default async function Header() {
+     let user = null;
+     const session = await getSession();
+     if (session) {
+          user = session.user;
      }
-     const items = [
-          {
-               label: `Hi! ${user?.nickname}`,
-               key: '0',
-               style: {
-                    fontSize: '1.4rem',
-                    padding: '0.8rem',
-               },
-          },
-          {
-               label: 'Đăng xuất',
-               key: '1',
-               icon: <FaSignOutAlt />,
-               onClick: handleLogout,
-               style: {
-                    fontSize: '1.4rem',
-                    padding: '0.8rem',
-               },
-          },
-     ];
+     console.log(user);
+     const headersList = headers();
+     const pathname = headersList.get('x-pathname');
+     console.log(pathname);
+
      return (
           <header className={clsx(styles.header)}>
                <nav>
@@ -107,35 +75,8 @@ export default function Header() {
                                              </li>
                                         }
                                         <li>
-                                             {
-                                                  user ? (
+                                             <Auth user={user} />
 
-
-                                                       <Dropdown
-                                                            menu={{ items }}
-                                                            trigger={['hover']}
-                                                            placement={'bottomRight'}
-                                                       >
-                                                            <button className={clsx(styles.btnHeader)}>
-                                                                 <FaUser className={clsx(styles.user)} />
-                                                            </button>
-                                                       </Dropdown>
-
-                                                  ) : (
-                                                       <div className={clsx(styles.btnGroup)}>
-                                                            <Link href={"/api/auth/login"}>
-                                                                 <button className={clsx(styles.btnLogin)}>
-                                                                      Đăng Nhập
-                                                                 </button>
-                                                            </Link>
-
-                                                            <button className={clsx(styles.btnResgiter)}>
-                                                                 Đăng Ký
-                                                            </button>
-                                                       </div>
-                                                  )
-
-                                             }
                                         </li>
                                    </ul>
                               </nav>

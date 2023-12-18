@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { configConsumerProps } from 'antd/es/config-provider';
 const api = "https://gsv9fx-8080.csb.app/mindmap";
 export const getMindMapMiddleware = createAsyncThunk("mindmap/getMindMapMiddleware", async (id) => {
      const response = await fetch(`${api}`);
@@ -42,7 +41,7 @@ export const deleteAllMindMapMiddleware = createAsyncThunk("mindmap/deleteAllMin
 
      let delArray = mindmaps?.map(({ id }) => id)
      let delFetch = delArray.map(eleid => {
-          return fetch(`http://localhost:3005/mindmap/${eleid}`, {
+          return fetch(`${api}/${eleid}`, {
                method: 'DELETE',
                headers: headers,
           });

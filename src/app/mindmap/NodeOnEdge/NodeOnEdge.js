@@ -73,17 +73,6 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
                     descTitle: data.descTitle,
                     image: data.img
                })
-               if (data.share === 1) {
-                    if (!Cookies.get('appSession')) {
-                         //route.push("/api/auth/login");
-                    } else {
-                         if (user) {
-                              if (data.idUser !== user.sub) {
-                                   //    route.push("/api/auth/login")
-                              }
-                         }
-                    }
-               }
           }
      }, [data, user]);
      useEffect(() => {

@@ -148,8 +148,11 @@ export default function ListMindMap() {
                                    }
                               </div>
                          </th>
-                         <th style={{ width: "50%" }} >
+                         <th style={{ width: "30%" }} >
                               <h3>Tên</h3>
+                         </th>
+                         <th style={{ width: "20%" }} >
+                              <h3>Trạng thái</h3>
                          </th>
                          <th style={{ width: "30%" }}>
                               <h3>Tạo lúc</h3>
@@ -163,7 +166,7 @@ export default function ListMindMap() {
                     {mindmaps.length > 0
                          &&
                          (
-                              mindmaps.map(({ id, title, desc, createDate }) => (
+                              mindmaps.map(({ id, title, desc, createDate, share }) => (
                                    <tr key={id}>
                                         <td style={{ textAlign: "center" }}>
                                              <input type="checkbox" value={id} checked={selectedItems.includes(id)} onChange={checkboxHandler} />
@@ -179,6 +182,13 @@ export default function ListMindMap() {
                                              </div>
 
                                         </td>
+                                        <td>
+                                             <span className={clsx(styles.status)}>
+                                                  {share === 1 ? "Chỉ mình Tôi" : "Công khai"}
+                                             </span>
+
+                                        </td>
+
                                         <td>
                                              <span className={clsx(styles.date)}>
                                                   {createDate}

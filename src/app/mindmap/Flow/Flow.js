@@ -9,6 +9,5 @@ export default function Flow({ id }) {
                <NodeOnEdgeDrop id={id} />
           </ReactFlowProvider>
      )
-
 }
 
