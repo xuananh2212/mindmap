@@ -29,7 +29,7 @@ export const mindMapSlices = createSlice({
           })
 
           builder.addCase(getMindMapMiddleware.fulfilled, (state, action) => {
-               state.listMindMaps = action.payload.data.filter(({ idUser }) => idUser === action.payload.id);
+               state.listMindMaps = action.payload.data.filter(({ idUser }) => idUser === action.payload.id)
                state.loading = false;
           });
           builder.addCase(postMindMapMiddleware.fulfilled, (state, action) => {

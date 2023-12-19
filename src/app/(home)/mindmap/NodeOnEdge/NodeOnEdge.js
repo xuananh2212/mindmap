@@ -201,8 +201,11 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
 
      };
      const handleOk = () => {
-          setLoading(true);
-          loadUpdateMindMap();
+          if (titleMindMap && urlShare) {
+               setLoading(true);
+               loadUpdateMindMap();
+          }
+
      };
 
      const handleCancel = () => {

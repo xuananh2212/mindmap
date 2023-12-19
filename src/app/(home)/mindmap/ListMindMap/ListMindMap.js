@@ -11,22 +11,24 @@ import { message, Popconfirm, Modal, Checkbox } from 'antd';
 import Link from 'next/link';
 export default function ListMindMap() {
      const idUser = useSelector((state) => state.mindMap.idUser);
+     const [isLoading, setIsLoading] = useState(true);
      const [selectedItems, setSelectedItems] = useState([]);
      const dispatch = useDispatch();
      const [open, setOpen] = useState(false);
      const [confirmLoading, setConfirmLoading] = useState(false);
-
      const mindmaps = useSelector(state => state.mindMap.listMindMaps);
      const loadMindmaps = async () => {
           try {
                const result = await dispatch(getMindMapMiddleware(idUser));
                unwrapResult(result);
+               setIsLoading(false);
 
           } catch (e) {
                notification.error({
                     message: 'server error!!',
                     duration: 1.0,
                });
+               setIsLoading(false);
           }
      }
      const loadDeleteMindMaps = async (id) => {
@@ -107,125 +109,134 @@ export default function ListMindMap() {
 
      };
      useEffect(() => {
-          loadMindmaps();
+          if (idUser) {
+               loadMindmaps();
+          }
      }, [idUser])
      return (
-          <table className={clsx(styles.tableMindMap)}>
 
-               <thead>
-                    <tr>
-                         <th style={{ width: "10%", textAlign: "center" }}>
-                              <div className={clsx(styles.checkAllMindMap)}>
-                                   <Checkbox
-                                        checked={mindmaps.length > 0 && (mindmaps?.length === selectedItems.length ? true : false)}
-                                        onChange={checkAllHandler} />
-                                   {
+          isLoading ? (<p className={clsx(styles.loading)}> loading...</p>)
+               : (
+                    <table className={clsx(styles.tableMindMap)}>
 
-                                        mindmaps.length > 0 && selectedItems.length > 0 &&
-                                        (
+                         <thead>
+                              <tr>
+                                   <th style={{ width: "10%", textAlign: "center" }}>
+                                        <div className={clsx(styles.checkAllMindMap)}>
+                                             <Checkbox
+                                                  checked={mindmaps.length > 0 && (mindmaps?.length === selectedItems.length ? true : false)}
+                                                  onChange={checkAllHandler} />
+                                             {
 
-                                             <>
-                                                  <button
-                                                       className={clsx(styles.btnCheckAll)}
-                                                       onClick={handleRemoveAllMindMap}>
-                                                       <FaTrashAlt className={clsx(styles.icon, styles.iconRemove)} />
-                                                  </button>
-                                                  <Modal
-                                                       title="Bạn muốn xóa Tất cả mindmap này?"
-                                                       open={open}
-                                                       onOk={handleOk}
-                                                       confirmLoading={confirmLoading}
-                                                       onCancel={handleCancel}
-                                                  >
-                                                       <p>Nếu xóa bạn không thể phục hồi dữ liệu!</p>
-                                                  </Modal>
-                                             </>
+                                                  mindmaps.length > 0 && selectedItems.length > 0 &&
+                                                  (
 
-
-                                        )
-
-                                   }
-                              </div>
-                         </th>
-                         <th style={{ width: "30%" }} >
-                              <h3>Tên</h3>
-                         </th>
-                         <th style={{ width: "20%" }} >
-                              <h3>Trạng thái</h3>
-                         </th>
-                         <th style={{ width: "30%" }}>
-                              <h3>Tạo lúc</h3>
-                         </th>
-                         <th style={{ width: "10%" }}>
-                              <h3>Hành Động</h3>
-                         </th>
-                    </tr>
-               </thead>
-               <tbody>
-                    {mindmaps.length > 0
-                         &&
-                         (
-                              mindmaps.map(({ id, title, desc, createDate, share }) => (
-                                   <tr key={id}>
-                                        <td style={{ textAlign: "center" }}>
-                                             <Checkbox value={id} checked={selectedItems.includes(id)} onChange={checkboxHandler} />
-
-                                        </td>
-                                        <td>
-                                             <div className={clsx(styles.name)}>
-                                                  <Link href={`/mindmap/${id}`} className={clsx(styles.titleMinMap)}> <h4>{title}</h4></Link>
-                                                  <p className={clsx(styles.desc)}>
-                                                       {desc}
-                                                  </p>
-
-                                             </div>
-
-                                        </td>
-                                        <td>
-                                             <span className={clsx(styles.status)}>
-                                                  {share === 1 ? "Chỉ mình Tôi" : "Công khai"}
-                                             </span>
-
-                                        </td>
-
-                                        <td>
-                                             <span className={clsx(styles.date)}>
-                                                  {createDate}
-                                             </span>
-
-                                        </td>
-                                        <td>
-                                             <div className={clsx(styles.action)}>
-
-                                                  <Link href={`/mindmap/${id}`}>
-                                                       <FaEdit className={clsx(styles.icon)} />
-                                                  </Link>
-                                                  <Popconfirm
-                                                       placement="top"
-                                                       title="Bạn muốn xóa mindmap này?"
-                                                       description="Nếu xóa bạn không thể phục hồi dữ liệu!"
-                                                       onConfirm={() => handleRemoveMindMapById(id)}
-                                                       onCancel={cancel}
-                                                       okText="Yes"
-                                                       cancelText="No"
-                                                  >
-                                                       <button>
-                                                            <FaTrashAlt className={clsx(styles.icon, styles.iconRemove)} />
-                                                       </button>
-                                                  </Popconfirm>
-                                             </div>
-
-                                        </td>
-
-                                   </tr>
+                                                       <>
+                                                            <button
+                                                                 className={clsx(styles.btnCheckAll)}
+                                                                 onClick={handleRemoveAllMindMap}>
+                                                                 <FaTrashAlt className={clsx(styles.icon, styles.iconRemove)} />
+                                                            </button>
+                                                            <Modal
+                                                                 title="Bạn muốn xóa Tất cả mindmap này?"
+                                                                 open={open}
+                                                                 onOk={handleOk}
+                                                                 confirmLoading={confirmLoading}
+                                                                 onCancel={handleCancel}
+                                                            >
+                                                                 <p>Nếu xóa bạn không thể phục hồi dữ liệu!</p>
+                                                            </Modal>
+                                                       </>
 
 
-                              ))
-                         )
-                    }
+                                                  )
 
-               </tbody>
-          </table>
+                                             }
+                                        </div>
+                                   </th>
+                                   <th style={{ width: "30%" }} >
+                                        <h3>Tên</h3>
+                                   </th>
+                                   <th style={{ width: "20%" }} >
+                                        <h3>Trạng thái</h3>
+                                   </th>
+                                   <th style={{ width: "30%" }}>
+                                        <h3>Tạo lúc</h3>
+                                   </th>
+                                   <th style={{ width: "10%" }}>
+                                        <h3>Hành Động</h3>
+                                   </th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              {mindmaps.length > 0
+                                   &&
+                                   (
+                                        mindmaps.map(({ id, title, desc, createDate, share }) => (
+                                             <tr key={id}>
+                                                  <td style={{ textAlign: "center" }}>
+                                                       <Checkbox value={id} checked={selectedItems.includes(id)} onChange={checkboxHandler} />
+
+                                                  </td>
+                                                  <td>
+                                                       <div className={clsx(styles.name)}>
+                                                            <Link href={`/mindmap/${id}`} className={clsx(styles.titleMinMap)}> <h4>{title}</h4></Link>
+                                                            <p className={clsx(styles.desc)}>
+                                                                 {desc}
+                                                            </p>
+
+                                                       </div>
+
+                                                  </td>
+                                                  <td>
+                                                       <span className={clsx(styles.status)}>
+                                                            {share === 1 ? "Chỉ mình Tôi" : "Công khai"}
+                                                       </span>
+
+                                                  </td>
+
+                                                  <td>
+                                                       <span className={clsx(styles.date)}>
+                                                            {createDate}
+                                                       </span>
+
+                                                  </td>
+                                                  <td>
+                                                       <div className={clsx(styles.action)}>
+
+                                                            <Link href={`/mindmap/${id}`}>
+                                                                 <FaEdit className={clsx(styles.icon)} />
+                                                            </Link>
+                                                            <Popconfirm
+                                                                 placement="top"
+                                                                 title="Bạn muốn xóa mindmap này?"
+                                                                 description="Nếu xóa bạn không thể phục hồi dữ liệu!"
+                                                                 onConfirm={() => handleRemoveMindMapById(id)}
+                                                                 onCancel={cancel}
+                                                                 okText="Yes"
+                                                                 cancelText="No"
+                                                            >
+                                                                 <button>
+                                                                      <FaTrashAlt className={clsx(styles.icon, styles.iconRemove)} />
+                                                                 </button>
+                                                            </Popconfirm>
+                                                       </div>
+
+                                                  </td>
+
+                                             </tr>
+
+
+                                        ))
+                                   )
+                              }
+
+                         </tbody>
+                    </table>
+
+
+               )
+
 
 
      )

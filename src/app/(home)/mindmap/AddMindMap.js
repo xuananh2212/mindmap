@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { notification } from 'antd';
 import clsx from 'clsx';
 import { unwrapResult } from '@reduxjs/toolkit';
@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { postMindMapMiddleware } from '@/store/middlewares/mindMapmiddleware';
+import { MoonLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './mindmap.module.scss';
 export default function AddMindMap() {
      const idUser = useSelector(state => state.mindMap.idUser);
+     const [isLoading, setisLoading] = useState(false);
      const router = useRouter();
      const dispatch = useDispatch();
      const loadPostMindMap = async (id) => {
@@ -43,28 +45,36 @@ export default function AddMindMap() {
                }));
                unwrapResult(result);
                router.push(`/mindmap/${id}`);
+               setisLoading(false);
 
           } catch (e) {
-
                notification.error({
                     message: 'server error!!',
                     duration: 1.5,
                }
                )
+               setisLoading(false);
           }
 
      }
      const handleClickMindMap = () => {
+          setisLoading(true);
           const id = uuidv4();
           loadPostMindMap(id);
      }
      return (
-          <div className={clsx(styles.addMindmap)}>
-               <button
-                    className="btn"
-                    onClick={handleClickMindMap}>
-                    Thêm
-               </button>
-          </div>
+          <>
+               <div className={clsx(styles.addMindmap)}>
+                    <button
+                         className="btn"
+                         onClick={handleClickMindMap}>
+                         Thêm
+                    </button>
+               </div>
+               {isLoading && (
+                    <div className={clsx(styles.loading)}> <MoonLoader color="#36d7b7" /></div>
+               )
+               }
+          </>
      )
 }
