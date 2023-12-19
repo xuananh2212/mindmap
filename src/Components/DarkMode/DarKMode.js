@@ -17,12 +17,13 @@ export default function DarKMode() {
           return null;
      }
      const handleToggleTheme = () => {
-          if (theme === "light") {
+          if (theme === "light" || theme === "system") {
                setTheme("dark")
           } else {
                setTheme("light")
           }
      }
+     console.log(theme);
      return (
           <div className={clsx(styles.darkMode)}>
                <input
