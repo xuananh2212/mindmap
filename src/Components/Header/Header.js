@@ -11,25 +11,27 @@ export default async function Header() {
           user = session.user;
      }
      return (
-          <header className={clsx(styles.header)}>
-               <nav>
-                    <Row align={"middle"}>
-                         <Col xl={4}>
-                              <Link href='/'>
-                                   <div className={clsx(styles.logo)}>
-                                        <span>
-                                             Mindmap Flow
-                                        </span>
+          <header className={clsx(styles.header, "bg-gray-50")}>
+               <div className='container'>
+                    <nav>
+                         <Row align={"middle"}>
+                              <Col xl={4}>
+                                   <Link href='/'>
+                                        <div className={clsx(styles.logo)}>
+                                             <span>
+                                                  Mindmap Flow
+                                             </span>
 
-                                   </div>
-                              </Link>
+                                        </div>
+                                   </Link>
 
-                         </Col>
-                         <Col xl={20}>
-                              <Menu user={user} />
-                         </Col>
-                    </Row>
-               </nav>
+                              </Col>
+                              <Col xl={20}>
+                                   <Menu user={user} />
+                              </Col>
+                         </Row>
+                    </nav>
+               </div>
 
           </header>
 

@@ -7,7 +7,7 @@ import { notification } from 'antd';
 import styles from './ListMindMap.module.scss';
 import clsx from 'clsx';
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { message, Popconfirm, Modal } from 'antd';
+import { message, Popconfirm, Modal, Checkbox } from 'antd';
 import Link from 'next/link';
 export default function ListMindMap() {
      const idUser = useSelector((state) => state.mindMap.idUser);
@@ -111,12 +111,12 @@ export default function ListMindMap() {
      }, [idUser])
      return (
           <table className={clsx(styles.tableMindMap)}>
+
                <thead>
                     <tr>
                          <th style={{ width: "10%", textAlign: "center" }}>
                               <div className={clsx(styles.checkAllMindMap)}>
-                                   <input
-                                        type="checkbox"
+                                   <Checkbox
                                         checked={mindmaps.length > 0 && (mindmaps?.length === selectedItems.length ? true : false)}
                                         onChange={checkAllHandler} />
                                    {
@@ -168,12 +168,12 @@ export default function ListMindMap() {
                               mindmaps.map(({ id, title, desc, createDate, share }) => (
                                    <tr key={id}>
                                         <td style={{ textAlign: "center" }}>
-                                             <input type="checkbox" value={id} checked={selectedItems.includes(id)} onChange={checkboxHandler} />
+                                             <Checkbox value={id} checked={selectedItems.includes(id)} onChange={checkboxHandler} />
 
                                         </td>
                                         <td>
                                              <div className={clsx(styles.name)}>
-                                                  <h4>{title}</h4>
+                                                  <Link href={`/mindmap/${id}`} className={clsx(styles.titleMinMap)}> <h4>{title}</h4></Link>
                                                   <p className={clsx(styles.desc)}>
                                                        {desc}
                                                   </p>
@@ -226,5 +226,7 @@ export default function ListMindMap() {
 
                </tbody>
           </table>
+
+
      )
 }

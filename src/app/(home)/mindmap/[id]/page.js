@@ -39,7 +39,10 @@ export default async function MindMapDetail({ params }) {
      }
      return (
 
-          <Flow id={params?.id} />
+          <Flow
+               className="p-20"
+               id={params?.id}
+          />
 
      )
 }

@@ -126,6 +126,10 @@ body {
      margin: 0 auto;
 }
 
+.ant-btn-primary {
+     background-color: #1677ff !important;
+}
+
 header {
      ul {
           li {
@@ -140,4 +144,9 @@ header {
                }
           }
      }
+}
+
+.container {
+     width: 1350px;
+     margin: 0 auto;
 }

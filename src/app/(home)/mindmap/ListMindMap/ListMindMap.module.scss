@@ -4,19 +4,38 @@
      border-collapse: separate;
      border-spacing: 0 16px;
 
+     td {
+          padding: 15px;
+     }
+
+     tr {
+          label {
+               width: 20px !important;
+               height: 20px !important;
+
+               span {
+                    &::after {
+                         display: block !important;
+                    }
+               }
+          }
+     }
 
      thead {
+
+
           th {
                text-align: left;
                font-size: 2.2rem;
 
           }
+
+
      }
 
      tbody {
           tr {
                cursor: pointer;
-               height: 40px;
                min-height: 40px;
                border-radius: 12px;
                border: 1px solid #333;
@@ -29,7 +48,7 @@
           td {
                .desc {
                     display: -webkit-box;
-                    margin-top: 4px;
+                    margin-top: 8px;
                     color: #817f7f;
                     text-overflow: ellipsis;
                     overflow: hidden;
@@ -57,7 +76,7 @@
 
           .btnCheckAll {
                top: 0;
-               left: 36px;
+               left: 82px;
                position: absolute;
 
                .icon {
@@ -74,11 +93,16 @@
 
      input {
           display: block;
-          width: 20px;
-          height: 20px;
      }
 
      .status {
           font-style: italic !important;
+     }
+
+     .titleMinMap {
+          &:hover {
+               color: #0093E9;
+               text-decoration: underline;
+          }
      }
 }
