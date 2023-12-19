@@ -10,7 +10,7 @@ export default function Footer() {
                     <div className="h-1/2 w-full flex md:flex-row flex-col justify-between items-start">
                          <div className="p-12 ">
                               <ul>
-                                   <p className="text-gray-800 font-bold text-3xl pb-6">
+                                   <p className=" font-bold text-3xl pb-6">
                                         Mind<span className="text-blue-600">map</span>
                                    </p>
                                    <div className="flex gap-6 pb-5">
@@ -23,7 +23,7 @@ export default function Footer() {
                          </div>
                          <div className="p-12">
                               <ul>
-                                   <p className="text-gray-800 font-bold text-2xl pb-4">Product</p>
+                                   <p className=" font-bold text-2xl pb-4">Product</p>
                                    <li className=" text-md pb-10  hover:text-blue-600 cursor-pointer">
                                         Stocks
                                    </li>
@@ -40,7 +40,7 @@ export default function Footer() {
                          </div>
                          <div className="p-12">
                               <ul>
-                                   <p className="text-gray-800 font-bold text-2xl pb-4">Company</p>
+                                   <p className=" font-bold text-2xl pb-4">Company</p>
                                    <li className=" text-md pb-10  hover:text-blue-600 cursor-pointer">
                                         About
                                    </li>
@@ -60,7 +60,7 @@ export default function Footer() {
                          </div>
                          <div className="p-12">
                               <ul>
-                                   <p className="text-gray-800 font-bold text-2xl pb-4">Support</p>
+                                   <p className=" font-bold text-2xl pb-4">Support</p>
                                    <li className=" text-md pb-10  hover:text-blue-600 cursor-pointer">
                                         Contact
                                    </li>
@@ -79,8 +79,8 @@ export default function Footer() {
                               </ul>
                          </div>
                     </div>
-                    <div className="flex flex-col justify-center items-center text-center  p-5 bg-gray-50">
-                         <h1 className=" text-gray-800 ">
+                    <div className="flex flex-col justify-center items-center text-center  p-5 bg-gray-50 text-black">
+                         <h1 className="  ">
                               © 2021-2022 All rights reserved | Build with ❤ by{" "}
                               <span className="hover:text-blue-600  cursor-pointer">
                                    streamline{" "}

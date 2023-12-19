@@ -4,11 +4,11 @@ import React from 'react'
 export default function Feature() {
      return (
           <>
-               <section className="bg-white dark:bg-gray-900">
+               <section className=" dark:bg-gray-900">
                     <div className="container px-6 py-10 mx-auto">
-                         <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white text-center">Features</h1>
+                         <h1 className="text-3xl font-semibold  capitalize lg:text-4xl dark:text-white text-center">Features</h1>
 
-                         <p className="xl:mt-6 text-gray-500 dark:text-gray-300 w-1/2 m-auto text-center leading-10">
+                         <p className="xl:mt-6  dark:text-gray-300 w-1/2 m-auto text-center leading-10">
                               The main aim of creating FWR blocks is to help designers, developers and agencies create websites and web apps quickly and easily. Each and every block uses minimal custom styling and is based on the utility first Tailwind framework.
                          </p>
                          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
@@ -20,9 +20,9 @@ export default function Feature() {
                                         </svg>
                                    </span>
 
-                                   <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">elegant Dark Mode</h1>
+                                   <h1 className="text-2xl font-semibold  capitalize dark:text-white">elegant Dark Mode</h1>
 
-                                   <p className="text-gray-500 dark:text-gray-300  leading-10">
+                                   <p className=" dark:text-gray-300  leading-10">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
                                    </p>
 
@@ -40,9 +40,9 @@ export default function Feature() {
                                         </svg>
                                    </span>
 
-                                   <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">Easy to customiztions</h1>
+                                   <h1 className="text-2xl font-semibold  capitalize dark:text-white">Easy to customiztions</h1>
 
-                                   <p className="text-gray-500 dark:text-gray-300  leading-10">
+                                   <p className=" dark:text-gray-300  leading-10">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
                                    </p>
 
@@ -60,9 +60,9 @@ export default function Feature() {
                                         </svg>
                                    </span>
 
-                                   <h1 className="text-2xl font-semibold text-gray-700 capitalize dark:text-white">Simple & clean designs</h1>
+                                   <h1 className="text-2xl font-semibold  capitalize dark:text-white">Simple & clean designs</h1>
 
-                                   <p className="text-gray-500 dark:text-gray-300  leading-10">
+                                   <p className=" dark:text-gray-300  leading-10">
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
                                    </p>
 

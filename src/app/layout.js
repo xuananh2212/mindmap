@@ -1,6 +1,7 @@
 import { Poppins } from 'next/font/google'
 import './globals.scss'
-import Provides from '@/store/Providers'
+import Provides from '@/store/Providers';
+import ProvidersTheme from './ProvidersTheme';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 const popins = Poppins({
   weight: '400',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
       <UserProvider>
         <body className={popins.className}>
           <Provides>
-            {children}
+            <ProvidersTheme>
+              {children}
+            </ProvidersTheme>
           </Provides>
         </body>
       </UserProvider>

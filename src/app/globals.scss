@@ -27,6 +27,21 @@
      font-weight: 700;
 }
 
+[data-theme="dark"] body {
+     background-color: #191d1e;
+     color: #fff;
+
+     footer,
+     header {
+          background-color: rgba(41, 39, 39, 0.164);
+     }
+
+     .nav-bar {
+          background-color: #000 !important;
+     }
+
+}
+
 button {
      color: black;
 }

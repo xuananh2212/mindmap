@@ -6,10 +6,10 @@ export default function PriceService() {
                <section className="py-20 relative z-50">
                     <div className="container">
                          <div className="mx-auto max-w-2xl sm:text-center">
-                              <span className="font-medium text-gray-400 tracking-widest text-3xl">our price</span>
+                              <span className="font-medium  tracking-widest text-3xl">our price</span>
                               <h2 className="md:text-5xl text-3xl font-medium tracking-tight mt-7">Price Plans</h2>
                               <div className="w-10 mx-auto mt-5 bg-gradient-to-r from-cyan-500 to-blue-500 h-[2px]"></div>
-                              <p className="mt-6 text-xl/8 text-gray-600 dark:text-gray-400">Choose the plan that suits your needs best and enjoy the creative process of brainstorming the new project of yours.</p>
+                              <p className="mt-6 text-xl/8  dark:text-gray-400">Choose the plan that suits your needs best and enjoy the creative process of brainstorming the new project of yours.</p>
                          </div>
 
                          <div className="grid lg:grid-cols-3 grid-cols-1 gap-10 2xl:px-28 mt-20">
@@ -63,7 +63,7 @@ export default function PriceService() {
                                         </div>
                                    </div>
                                    <div className="group">
-                                        <div className="border rounded-xl border-gray-300 bg-white dark:border-gray-700 dark:bg-neutral-900">
+                                        <div className="border rounded-xl border-gray-300 text-black bg-white dark:border-gray-700 dark:bg-neutral-900">
                                              <div className="text-center">
                                                   <div className="flex flex-col">
                                                        <div className="text-center pt-10">

@@ -11,6 +11,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { BsArrowUpSquareFill } from "react-icons/bs";
 const { idUser } = mindMapSlices.actions;
 import { Row, Col } from 'antd';
+import DarKMode from '../DarkMode/DarKMode';
 export default function Menu({ user }) {
      const [navBarSticky, setNavbarSticky] = useState(false);
      const [arrowTop, setArrowTop] = useState(false);
@@ -19,12 +20,12 @@ export default function Menu({ user }) {
      const dispatch = useDispatch();
      const handleNavbarStick = () => {
           if (window !== undefined) {
-               window.scrollY > 100 ? setNavbarSticky(!navBarSticky) : setNavbarSticky(navBarSticky);
+               window.scrollY > 80 ? setNavbarSticky(!navBarSticky) : setNavbarSticky(navBarSticky);
           }
      };
      const handleArrowTop = () => {
           if (window !== undefined) {
-               window.scrollY > 100 ? setArrowTop(true) : setArrowTop(false);
+               window.scrollY > 80 ? setArrowTop(true) : setArrowTop(false);
           }
      };
      const handleClickArrowTop = () => {
@@ -69,7 +70,7 @@ export default function Menu({ user }) {
      ];
      return (
           <>
-               <div className={navBarSticky ? clsx(styles.navBar, styles.stick) : clsx(styles.navBar)}>
+               <div className={navBarSticky ? clsx(styles.navBar, styles.stick, "nav-bar") : clsx(styles.navBar)}>
                     <div className='container'>
                          <Row align={"middle"}>
                               <Col xl={4}>
@@ -136,16 +137,18 @@ export default function Menu({ user }) {
                                              {
                                                   user ? (
 
-
-                                                       <Dropdown
-                                                            menu={{ items }}
-                                                            trigger={['hover']}
-                                                            placement={'bottomRight'}
-                                                       >
-                                                            <button className={clsx(styles.btnHeader)}>
-                                                                 <FaUser className={clsx(styles.user)} />
-                                                            </button>
-                                                       </Dropdown>
+                                                       <div className={clsx(styles.groupDarkModeDropDow)}>
+                                                            <DarKMode />
+                                                            <Dropdown
+                                                                 menu={{ items }}
+                                                                 trigger={['hover']}
+                                                                 placement={'bottomRight'}
+                                                            >
+                                                                 <button className={clsx(styles.btnHeader)}>
+                                                                      <FaUser className={clsx(styles.user)} />
+                                                                 </button>
+                                                            </Dropdown>
+                                                       </div>
 
                                                   ) : (
                                                        <div className={clsx(styles.btnGroup)}>
