@@ -8,7 +8,7 @@ export default function Feature() {
                     <div className="container px-6 py-10 mx-auto">
                          <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white text-center">Features</h1>
 
-                         <p className="xl:mt-6 dark:text-gray-300 w-1/2 m-auto text-center">
+                         <p className="xl:mt-6 text-gray-500 dark:text-gray-300 w-1/2 m-auto text-center">
                               The main aim of creating FWR blocks is to help designers, developers and agencies create websites and web apps quickly and easily. Each and every block uses minimal custom styling and is based on the utility first Tailwind framework.
                          </p>
                          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
