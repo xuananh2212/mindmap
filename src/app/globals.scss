@@ -35,6 +35,10 @@ a {
      text-decoration: none;
 }
 
+html {
+     scroll-behavior: smooth;
+}
+
 .btn-variant {
      min-width: 60px;
      margin-left: 3px;
