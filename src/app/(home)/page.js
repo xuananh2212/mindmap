@@ -38,7 +38,7 @@ export default function Home() {
                                    </span>
                               </h2>
 
-                              <p className="pr-5 mb-5 text-base text-gray-700 md:text-2xl">
+                              <p className="pr-5 mb-5 text-base text-gray-700 md:text-2xl leading-14">
                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem
                                    accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
                                    quae. explicabo.

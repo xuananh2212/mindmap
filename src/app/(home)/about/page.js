@@ -20,7 +20,7 @@ export default function About() {
                                         <h4 className="text-xl font-bold text-white">
                                              Great for your awesome project
                                         </h4>
-                                        <p className="text-md font-light mt-2 text-white">
+                                        <p className="text-md font-light mt-2 text-white leading-10">
                                              Putting together a page has never been easier than matching
                                              together pre-made components. From landing pages presentation
                                              to login areas, you can easily customise and built your pages.
@@ -28,7 +28,6 @@ export default function About() {
                                    </blockquote>
                               </div>
                          </div>
-
                          <div className="w-full md:w-6/12 px-4">
                               <div className="flex flex-wrap">
                                    <div className="w-full md:w-6/12 px-4">
@@ -38,7 +37,7 @@ export default function About() {
                                                        <Fa0 />
                                                   </div>
                                                   <h6 className="text-xl mb-1 font-semibold">CSS Components</h6>
-                                                  <p className="mb-4 text-blueGray-500">
+                                                  <p className="mb-4 text-blueGray-500 leading-10">
                                                        Notus JS comes with a huge number of Fully Coded CSS
                                                        components.
                                                   </p>
@@ -52,7 +51,7 @@ export default function About() {
                                                   <h6 className="text-xl mb-1 font-semibold">
                                                        JavaScript Components
                                                   </h6>
-                                                  <p className="mb-4 text-blueGray-500">
+                                                  <p className="mb-4 text-blueGray-500 leading-10">
                                                        We also feature many dynamic components for React, NextJS,
                                                        Vue and Angular.
                                                   </p>
@@ -66,7 +65,7 @@ export default function About() {
                                                        <Fa2 />
                                                   </div>
                                                   <h6 className="text-xl mb-1 font-semibold">Pages</h6>
-                                                  <p className="mb-4 text-blueGray-500">
+                                                  <p className="mb-4 text-blueGray-500 leading-10">
                                                        This extension also comes with 3 sample pages. They are
                                                        fully coded so you can start working instantly.
                                                   </p>
@@ -78,7 +77,7 @@ export default function About() {
                                                        <Fa3 />
                                                   </div>
                                                   <h6 className="text-xl mb-1 font-semibold">Documentation</h6>
-                                                  <p className="mb-4 text-blueGray-500">
+                                                  <p className="mb-4 text-blueGray-500 leading-10">
                                                        Built by developers for developers. You will love how easy
                                                        is to to work with Notus JS.
                                                   </p>
