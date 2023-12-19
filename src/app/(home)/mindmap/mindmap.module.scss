@@ -9,6 +9,7 @@
      }
 
      .loading {
+          z-index: 999;
           position: fixed;
           inset: 0;
           display: flex;
