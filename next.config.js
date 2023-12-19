@@ -3,7 +3,7 @@ const nextConfig = {
      images: {
           remotePatterns: [
                {
-                    hostname: 'f8-mindmap.sanphamkythuat.online',
+                    hostname: 'f8-mindmap.sanphamkythuat.online'
                },
           ],
      },

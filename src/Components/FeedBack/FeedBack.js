@@ -1,7 +1,7 @@
 "use client"
 import { Carousel, Rate } from 'antd';
 import clsx from 'clsx';
-import styles from './Feedback.module.scss';
+import styles from './FeedBack.module.scss';
 import imgUser1 from '../../../public/imgs/user-1.jpg'
 import Image from 'next/image';
 export default function FeedBack() {
