@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image';
-import mindMapImage from '../../../public/imgs/mindmap.jpg';
+import mindMapImage from '../../../public/imgs/minmap-2.jpg';
+import FeedBack from '../../Components/FeedBack/FeedBack';
 export default function Home() {
      return (
           <>
@@ -54,20 +55,16 @@ export default function Home() {
                          </div>
                     </div>
                </div>
-               <div id="wrapper" className="grid grid-cols-1 xl:grid-cols-2 xl:h-screen">
+               <div id="wrapper" className="grid grid-cols-1 xl:grid-cols-2">
                     <div id="col-1">
                          <Image
                               style={{ objectFit: "cover" }}
-                              width={350}
-                              height={400}
+                              width={550}
+                              height={300}
                               className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
                               src={mindMapImage.src}
                               alt="mindmap"
                          />
-                         {/* <h1 className="text-blue-500 font-extrabold text-4xl md:text-6xl">MindMap
-                              Project
-                         </h1>
-                         <p className="text-white text-normal md:text-3xl pt-3 md:pt-6 font-medium line-clamp-3">Mindmap là một biểu đồ hình vẽ sơ đồ, thường được sử dụng để tổ chức thông tin, ý tưởng, và liên kết giữa chúng. Nó thường bắt đầu từ một ý tưởng trung tâm và mở rộng ra các nhánh khác, biểu thị mối quan hệ giữa các ý tưởng khác nhau. Mind map thường được sử dụng để ghi chú, lên kế hoạch, tổ chức thông tin, và giúp người sử dụng hiểu rõ hơn về mối quan hệ giữa các yếu tố khác nhau trong một chủ đề cụ thể</p> */}
                     </div>
                     <div id="col-2" className="px-3 md:px-20 xl:py-64 xl:px-12">
 
@@ -83,6 +80,7 @@ export default function Home() {
 
                     </div>
                </div>
+               <FeedBack />
           </>
 
 
