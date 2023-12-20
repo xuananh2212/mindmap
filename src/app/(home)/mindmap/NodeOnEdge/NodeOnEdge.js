@@ -18,7 +18,6 @@ import { MdOutlineClear } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import styles from './NodeOnEdge.module.scss';
 import clsx from 'clsx';
-import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { notification, Radio, Form, Input, Button, Modal } from 'antd';
 import { updateMindMapMiddleware } from '@/store/middlewares/mindMapmiddleware';
@@ -201,7 +200,7 @@ export default function NodeOnEdgeDrop({ id: paramsId }) {
 
      };
      const handleOk = () => {
-          if (titleMindMap && urlShare) {
+          if (titleMindMap && urlImg) {
                setLoading(true);
                loadUpdateMindMap();
           }
