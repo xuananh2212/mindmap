@@ -31,7 +31,7 @@ function CustomNode({ data, isConnectable, ...rest }) {
                               (<div>
                                    <button
                                         onDoubleClick={handleDoubleClick}
-                                        style={{ color: "#fff", width: "100%", display: "block", textAlign: "center" }}
+                                        style={{ color: "#fff", width: "100%", display: "block", textAlign: "center", wordBreak: "break-all" }}
                                    >
                                         {data.label}
                                    </button>
