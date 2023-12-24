@@ -33,7 +33,7 @@ export default async function MindMapDetail({ params }) {
                redirect("/api/auth/login");
           } else {
                if (data.idUser !== idUser) {
-                    redirect("/api/auth/login");
+                    notFound();
                }
           }
      }
